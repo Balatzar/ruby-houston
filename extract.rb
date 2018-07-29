@@ -2,9 +2,6 @@ require 'csv'
 require 'open-uri'
 require 'fileutils'
 
-limit = 15
-j = 0
-
 destination = './photos'
 temp_folders = 4
 winners = []
@@ -45,8 +42,6 @@ CSV.foreach('./images.csv', headers: true) do |row|
     File.delete("#{folder}/#{name}") rescue Errno::ENOENT
   end
   sleep(5)
-  break if j == limit
-  j += 1
 end
 
 File.open("./logs", 'w') { |file| file.write(winners.join(",")) }
